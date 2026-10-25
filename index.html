@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kshitiz Srivastava | Portfolio</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow: #FFDE47;
+            --blue: #14C38E;
+            --red: #FF407D;
+            --dark: #1A1A1A;
+            --white: #FFFFFF;
+            --border-size: 4px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Neue', cursive, sans-serif;
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            /* Halftone-style dot background pattern */
+            background-image: radial-gradient(var(--dark) 10%, transparent 11%), radial-gradient(var(--dark) 10%, transparent 11%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-attachment: fixed;
+            color: var(--dark);
+            padding: 20px;
+        }
+
+        /* Comic Book Border Effect */
+        .comic-border {
+            border: var(--border-size) solid var(--dark);
+            box-shadow: 8px 8px 0px var(--dark);
+            background: var(--white);
+        }
+
+        /* Container Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        /* Header / Hero Panel */
+        header {
+            grid-column: span 12;
+            background: var(--yellow) !important;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 4.5rem;
+            letter-spacing: 3px;
+            color: var(--dark);
+            text-shadow: 4px 4px 0px var(--white), -4px -4px 0px var(--white), 4px -4px 0px var(--white), -4px 4px 0px var(--white), 8px 8px 0px var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            background: var(--white);
+            display: inline-block;
+            padding: 5px 15px;
+            border: 3px solid var(--dark);
+            transform: rotate(1deg);
+            box-shadow: 4px 4px 0px var(--dark);
+        }
+
+        /* Sidebar: Profile & Skills */
+        .sidebar {
+            grid-column: span 4;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar, .main-content {
+                grid-column: span 12 !important;
+            }
+        }
+
+        .panel {
+            padding: 20px;
+            padding-top: 40px;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .panel-title {
+            position: absolute;
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            background: var(--red);
+            color: var(--white);
+            padding: 5px 15px;
+            top: -25px;
+            left: 10px;
+            border: 3px solid var(--dark);
+            transform: skew(-10deg);
+            box-shadow: 4px 4px 0px var(--dark);
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* Profile Photo Container Frame */
+        .avatar-frame {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border: var(--border-size) solid var(--dark);
+            background: var(--yellow);
+            transform: rotate(1deg);
+            box-shadow: 4px 4px 0px var(--dark);
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .links a {
+            display: block;
+            color: var(--dark);
+            text-decoration: none;
+            margin-bottom: 8px;
+            padding: 5px;
+            border-bottom: 2px dashed var(--dark);
+            transition: 0.2s;
+        }
+        .links a:hover {
+            background-color: var(--yellow);
+            padding-left: 10px;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .badge {
+            background: #e0e0e0;
+            border: 2px solid var(--dark);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            box-shadow: 2px 2px 0px var(--dark);
+        }
+
+        /* Main Content Panel */
+        .main-content {
+            grid-column: span 8;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Project Comic Strip Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .project-card {
+            background: var(--white);
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03) rotate(1deg);
+        }
+
+        .project-thumbnail {
+            height: 120px;
+            background: var(--blue);
+            border-bottom: var(--border-size) solid var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--white);
+            text-shadow: 2px 2px 0 var(--dark);
+        }
+
+        .project-card:nth-child(2) .project-thumbnail { background: var(--red); }
+        .project-card:nth-child(3) .project-thumbnail { background: var(--yellow); color: var(--dark); text-shadow: none; }
+
+        .project-info {
+            padding: 15px;
+        }
+
+        /* Pow / Boom Action Popups for Achievements */
+        .achievement-item {
+            position: relative;
+            padding: 10px 0;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        .pow-icon {
+            font-family: 'Bangers', cursive;
+            background: var(--red);
+            color: var(--white);
+            padding: 3px 8px;
+            border: 2px solid var(--dark);
+            transform: rotate(-5deg) scale(1.1);
+            margin-right: 15px;
+            box-shadow: 2px 2px 0 var(--dark);
+        }
+
+        /* Interactive Speech Bubble Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 600px;
+            width: 100%;
+            background: var(--white);
+            padding: 30px;
+            position: relative;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -15px; right: -15px;
+            background: var(--red);
+            color: var(--white);
+            border: var(--border-size) solid var(--dark);
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            padding: 5px 12px;
+            cursor: pointer;
+            box-shadow: 3px 3px 0 var(--dark);
+        }
+        
+        .close-btn:hover { background: var(--dark); }
+
+        /* Action Project Button inside Modal */
+        .project-action-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            border: 3px solid var(--dark);
+            box-shadow: 4px 4px 0px var(--dark);
+            transform: skew(-5deg);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .project-action-btn:hover {
+            background: var(--yellow);
+            color: var(--dark);
+            transform: skew(-5deg) translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--dark);
+        }
+
+        /* Download Resume Button */
+        .resume-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            text-align: center;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 1.5px;
+            border: 3px solid var(--dark);
+            box-shadow: 4px 4px 0px var(--dark);
+            transform: skew(-2deg);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .resume-btn:hover {
+            background: var(--yellow);
+            color: var(--dark);
+            transform: skew(-2deg) translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--dark);
+        }
+
+        footer {
+            grid-column: span 12;
+            text-align: center;
+            padding: 20px;
+            background: var(--dark);
+            color: gray;
+            margin-top: 20px;
+            transform: rotate(0.5deg);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+        
+        /* Responsive Media Queries */
+        @media (max-width: 768px) {
+            .comic-border {
+                box-shadow: 4px 4px 0px var(--dark);
+            }
+            .avatar-frame {
+                max-width: 250px;
+                margin: 0 auto;
+            }
+            .close-btn {
+                top: -5px; right: -5px;
+                font-size: 1.2rem;
+                padding: 3px 10px;
+            }
+            .achievement-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .pow-icon {
+                margin-right: 0;
+            }
+
+            /* =========================================
+       COMIC LOADING SCREEN MOBILE STYLES
+    ========================================= */
+    .loader-container {
+        padding: 30px 20px; /* Reduce padding to save space */
+        width: 90%;         /* Prevent it from hitting screen edges */
+        max-width: 350px;   /* Keep it from getting too wide */
+        gap: 20px;          /* Tighter spacing between elements */
+    }
+
+    .burst-text {
+        font-size: 4rem;    /* Scale down the BAM! text */
+    }
+
+    #comic-loading-text {
+        font-size: 1.4rem;  /* Scale down the loading text */
+        text-align: center; /* Ensure it stays centered if it wraps to two lines */
+    }
+
+    .progress-box {
+        width: 100%;        /* Let it shrink to fit the smaller container */
+        max-width: 260px;   /* Cap the maximum size */
+    }
+        }
+
+        /* =========================================
+           COMIC LOADING SCREEN STYLES
+        ========================================= */
+        .comic-loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--yellow);
+            background-image: radial-gradient(var(--dark) 15%, transparent 16%), radial-gradient(var(--dark) 15%, transparent 16%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            background: var(--white);
+            padding: 40px 60px;
+            border: var(--border-size) solid var(--dark);
+            box-shadow: 12px 12px 0px var(--dark);
+            transform: rotate(-2deg);
+        }
+
+        /* Pulsing Action Text */
+        .burst-wrapper {
+            position: relative;
+            animation: pulseBurst 0.8s infinite alternate cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .burst-text {
+            font-family: 'Bangers', cursive;
+            font-size: 6rem;
+            color: var(--red);
+            text-shadow: 
+                4px 4px 0px var(--dark), 
+                -4px -4px 0px var(--dark), 
+                4px -4px 0px var(--dark), 
+                -4px 4px 0px var(--dark),
+                8px 8px 0px var(--white);
+            letter-spacing: 4px;
+            transform: rotate(5deg);
+        }
+
+        @keyframes pulseBurst {
+            0% { transform: scale(1) rotate(5deg); }
+            100% { transform: scale(1.15) rotate(0deg); }
+        }
+
+        /* Loading Text */
+        #comic-loading-text {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--dark);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        /* Progress Bar */
+        .progress-box {
+            width: 300px;
+            height: 35px;
+            background: #eee;
+            transform: skew(-10deg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--blue);
+            border-right: 4px solid var(--dark);
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.2) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            background-size: 28px 28px;
+            animation: 
+                fillAction 4s ease-out forwards,
+                moveStripes 1s linear infinite;
+        }
+
+        @keyframes fillAction {
+            0% { width: 0%; }
+            40% { width: 50%; }
+            70% { width: 75%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 28px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="comic-loader" class="comic-loader-overlay">
+        <div class="loader-container">
+            <div class="burst-wrapper">
+                <div class="burst-text">BAM!</div>
+            </div>
+            
+            <h2 id="comic-loading-text">SKETCHING OUTLINES...</h2>
+            
+            <div class="progress-box comic-border">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <header class="comic-border">
+            <h1>KSHITIZ SRIVASTAVA</h1>
+            <div class="subtitle">AI / ML Student &amp; an aspiring Scalable Software Systems Developer</div>
+        </header>
+
+        <div class="sidebar">
+            
+            <div class="panel comic-border">
+                <span class="panel-title">THE HERO</span>
+                <div class="avatar-frame">
+                    <img src="My_New_Photo.jpeg" alt="Kshitiz Srivastava Profile Photo">
+                </div>
+            </div>
+            
+            <div class="panel comic-border">
+                <span class="panel-title" style="background: var(--blue);">CONTACT ME!</span>
+                <div class="links">
+                    <p style="margin-bottom: 10px;">📍 Patna, Bihar</p>
+                    <a href="mailto:srivastava.kshitiz05@gmail.com" >📧 srivastava.kshitiz05@gmail.com</a>
+                    <a href="https://github.com/kshitizSrivastava29" target="_blank">🔗 GitHub Profile</a>
+                    <a href="https://leetcode.com/u/Kshitiz_Srivastava05/" target="_blank">🔗 LeetCode Profile</a>
+                </div>
+                <a href="My_Resume (8).pdf" download class="resume-btn">📄 GRAB RESUME!</a>
+            </div>
+
+            <div class="panel comic-border">
+                <span class="panel-title">EDUCATION</span>
+                <div>
+                    <h4 style="color: var(--red); font-size: 1.1rem;">B.Tech in CSE (AI &amp; ML)</h4>
+                    <p style="font-size: 0.9rem;">GL Bajaj Institute of Technology and Management</p>
+                    <p style="margin-bottom: 12px;">📊 CGPA: 8.57 (2024-2028)</p>
+                    
+                    <h4 style="color: var(--blue); font-size: 1.1rem;">Intermediate (CBSE)</h4>
+                    <p style="margin-bottom: 12px;">⚡ 86.8% | 2024</p>
+                    
+                    <h4 style="color: var(--dark); font-size: 1.1rem;">High School (CBSE)</h4>
+                    <p>⚡ 91.4% | 2022</p>
+                </div>
+            </div>
+
+            <div class="panel comic-border">
+                <span class="panel-title">POWERS &amp; SKILLS</span>
+                <div>
+                    <p style="color: var(--red); margin-bottom: 5px;">LANGUAGES:</p>
+                    <div class="badge-container" style="margin-bottom: 15px;">
+                        <span class="badge">Java</span><span class="badge">C</span><span class="badge">Python</span>
+                    </div>
+
+                    <p style="color: var(--blue); margin-bottom: 5px;">WEB DEV:</p>
+                    <div class="badge-container" style="margin-bottom: 15px;">
+                        <span class="badge">HTML</span><span class="badge">CSS</span><span class="badge">JavaScript</span>
+                    </div>
+
+                    <p style="color: var(--dark); margin-bottom: 5px;">DATABASES &amp; TOOLS:</p>
+                    <div class="badge-container" style="margin-bottom: 15px;">
+                        <span class="badge">MySQL</span><span class="badge">Git</span><span class="badge">GitHub</span>
+                    </div>
+
+                    <p style="color: var(--red); margin-bottom: 5px;">CONCEPTS:</p>
+                    <div class="badge-container">
+                        <span class="badge">Data Structures</span><span class="badge">Algorithms</span><span class="badge">OOPs</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main-content">
+            
+            <div class="panel comic-border" style="background: #FFFBF0; margin-top: 20px;">
+                <span class="panel-title" style="background: var(--blue); top: -25px; left: 10px;">THE MISSION</span>
+                <p style="font-size: 1.2rem; line-height: 1.6;">
+                    Computer Science student specializing in Artificial Intelligence and Machine Learning with a strong foundation in Java, Data Structures, and Web Development. Enthusiastic about developing scalable software systems and strengthening problem-solving abilities through competitive programming and practical projects.
+                </p>
+            </div>
+            <div class="panel comic-border">
+                <span class="panel-title" style="background:#fe6a2f;">
+                    INTERNSHIPS
+                </span>
+
+                <p style="font-style: italic; color: #555; margin-bottom: 10px;">
+                    (Click the panel below to view internship details!)
+                </p>
+
+                <div class="project-grid">
+                    <div class="project-card comic-border"
+                    onclick="openModal(
+                    'AI/ML Intern | Tata Steel Prashikshan',
+                    'Duration : May 2026 – July 2026 (2 Months)\n\nWorked on an industrial Machine Learning project to predict Ladle Furnace temperature drop using real-world steel manufacturing data.\n\n• Analyzed and preprocessed 3,300+ production records.\n• Developed a Random Forest Regression model.\n• Achieved R² = 0.95 on an initial 1,800-record dataset and R² = 0.55 on a larger industrial dataset.\n• Performed feature engineering, model evaluation, and visualization using Python, Pandas, Scikit-Learn, and Matplotlib.',
+                    'https://github.com/kshitizSrivastava29/Summer-Internship-Tata-Steel-Prashikshan'
+                    )">
+                        <div class="project-thumbnail" style="background:#e55df1;">
+                            AI / ML INTERN
+                        </div>
+
+                        <div class="project-info">
+                            <h3>Tata Steel Prashikshan</h3>
+                            <p style="font-size:0.85rem; color:#666; margin-top:5px;">
+                                Machine Learning • Python • 2 Months
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel comic-border">
+                <span class="panel-title">CHRONICLES (PROJECTS)</span>
+                <p style="font-style: italic; color: #555; margin-bottom: 10px;">(Click on a comic panel below to read details!)</p>
+                
+                <div class="project-grid">
+                    
+                    <div class="project-card comic-border" onclick="openModal('Public Issue Reporting Website', 'Developed a web-based complaint reporting platform using HTML, CSS, JavaScript, and MySQL. Implemented a real-time monitoring system to track complaint status and designed an optimized MySQL database backend for highly efficient issue management.', 'https://kshitizsrivastava29.github.io/project1_public_issue_reporting_website.io/')">
+                        <div class="project-thumbnail">PUBLIC ISSUE TRACKER</div>
+                        <div class="project-info">
+                            <h3>Public Issue Reporting Website</h3>
+                            <p style="font-size:0.85rem; color:#666; margin-top:5px;">HTML, CSS, JS, MySQL</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card comic-border" onclick="openModal('Notes Sharing Platform', 'Built a web-based notes sharing platform enabling students to upload, categorize, and search study materials collaboratively using HTML, CSS, and JavaScript. Crafted a smart filtering system built completely around subject, course, and discrete file categories to drastically improve accessibility.', 'https://kshitizsrivastava29.github.io/Notes_Sharing_Platform/')">
+                        <div class="project-thumbnail">NOTE SHARE</div>
+                        <div class="project-info">
+                            <h3>Notes Sharing Platform</h3>
+                            <p style="font-size:0.85rem; color:#666; margin-top:5px;">HTML, CSS, JavaScript</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card comic-border" onclick="openModal('Portfolio Website', 'Designed and developed a responsive and interactive custom personal portfolio website to showcase dynamic projects and engineering skillsets. Built completely native code structures ensuring perfect UI rendering across varying screen sizes.', 'https://kshitizsrivastava29.github.io/MY_PORTFOLIO-COMIC-THEME-/')">
+                        <div class="project-thumbnail">PORTFOLIO</div>
+                        <div class="project-info">
+                            <h3>Portfolio Website</h3>
+                            <p style="font-size:0.85rem; color:#666; margin-top:5px;">HTML, CSS, JavaScript</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel comic-border">
+                <span class="panel-title" style="background: var(--yellow); color: var(--dark);">ACHIEVEMENTS</span>
+                <div>
+                    <div class="achievement-item">
+                        <div class="pow-icon">BOOM!</div>
+                        <div>Solved 200+ Data Structures &amp; Algorithms problems on LeetCode.</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="pow-icon">POW!</div>
+                        <div>Solved 70+ algorithmic problems on GeeksforGeeks.</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="pow-icon">BAM!</div>
+                        <div>Participated in Smart India Hackathon (SIH) 2025.</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="pow-icon">WHAM!</div>
+                        <div>Qualified for Daksh Hackathon.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="comic-border">
+            <p>© 2026 Kshitiz Srivastava. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <div id="projectModal" class="modal" onclick="closeModal()">
+        <div class="modal-content comic-border" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">X</button>
+            <h2 id="modalTitle" style="font-family: 'Bangers', cursive; font-size: 2.5rem; color: var(--red); margin-bottom: 15px;">Project Title</h2>
+            <p id="modalDescription" style="font-size: 1.1rem; line-height: 1.6; font-weight: normal;"></p>
+            <a id="modalProjectLink" href="#" target="_blank" class="project-action-btn">💥 VIEW PROJECT !</a>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, description, projectUrl) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDescription').innerText = description;
+            
+            const projectBtn = document.getElementById('modalProjectLink');
+            if (projectUrl) {
+                projectBtn.href = projectUrl;
+                projectBtn.style.display = 'inline-block';
+            } else {
+                projectBtn.style.display = 'none';
+            }
+            
+            document.getElementById('projectModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').style.display = 'none';
+        }
+
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+    <script>
+        // Array of comic-themed loading phrases
+        const loadingPhrases = [
+            "SKETCHING OUTLINES...",
+            "INKING PANELS...",
+            "ADDING HALFTONES...",
+            "PRINTING COMIC..."
+        ];
+        
+        const textElement = document.getElementById('comic-loading-text');
+        const loaderOverlay = document.getElementById('comic-loader');
+        
+        let phraseIndex = 0;
+        
+        // Cycle through the text every 600ms
+        const textInterval = setInterval(() => {
+            phraseIndex = (phraseIndex + 1) % loadingPhrases.length;
+            textElement.innerText = loadingPhrases[phraseIndex];
+        }, 800);
+
+        // Fade out and remove the loader after the bar fills (2.8 seconds)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                clearInterval(textInterval);
+                textElement.innerText = "ISSUE #1 READY!";
+                textElement.style.color = "var(--red)";
+                
+                // Add a slight delay so the user reads the "READY" text
+                setTimeout(() => {
+                    loaderOverlay.style.opacity = '0';
+                    loaderOverlay.style.visibility = 'hidden';
+                    
+                    // Remove from DOM entirely after fade out
+                    setTimeout(() => {
+                        loaderOverlay.remove();
+                    }, 500);
+                }, 500);
+                
+            }, 4000); // 2.5s matches the CSS bar animation time
+        });
+    </script>
+</body>
+</html>
